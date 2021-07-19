@@ -27,6 +27,7 @@ function App() {
         <p>Covid-19 TRACKER </p>
         <FormControl className="app__dropdown">
           <Select variant="outlined" value="abc">
+            <MenuItem value="worldwide">Worldwide</MenuItem>
             {countries.map((country) => (
               <MenuItem value={country.value}>{country.name}</MenuItem>
             ))}
