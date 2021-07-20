@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState("worldwide");
 
   // https://disease.sh/v3/covid-19/countries
   useEffect(() => {
@@ -12,8 +13,8 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           const countries = data.map((country) => ({
-            name: country.country,
-            value: country.countryInfo.iso2,
+            name: country.country,//kenya, United Kingdom
+            value: country.countryInfo.iso2, // ke, UK
           }));
           setCountries(countries);
         });
@@ -26,7 +27,7 @@ function App() {
       <div className="app__header">
         <p>Covid-19 TRACKER </p>
         <FormControl className="app__dropdown">
-          <Select variant="outlined" value="abc">
+          <Select variant="outlined" value={country}>
             <MenuItem value="worldwide">Worldwide</MenuItem>
             {countries.map((country) => (
               <MenuItem value={country.value}>{country.name}</MenuItem>
