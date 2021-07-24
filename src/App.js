@@ -11,12 +11,13 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
 
   useEffect(() => {
-     fetch("https://disease.sh./v3/covid-19/all")
-       .then((response) => response.json())
-       .then((data) => {
-         setCountryInfo(data);
-       });
-  }, [])
+    fetch("https://disease.sh./v3/covid-19/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
+
   useEffect(() => {
     const getCountriesData = async () => {
       fetch("https://disease.sh/v3/covid-19/countries")
@@ -68,19 +69,19 @@ function App() {
         </div>
         <div className="app__stats">
           <InfoBox
-            title="corona cases"
-            total={countryInfo.todayCases}
-            cases={countryInfo.cases}
+            title="Coronavirus Cases"
+            total={countryInfo.cases}
+            cases={countryInfo.todayCases}
           />
           <InfoBox
             title="Recovered"
-            total={countryInfo.todayRecovered}
-            cases={countryInfo.recovered}
+            total={countryInfo.recovered}
+            cases={countryInfo.todayRecovered}
           />
           <InfoBox
             title="Deaths"
-            total={countryInfo.todayDeaths}
-            cases={countryInfo.deaths}
+            total={countryInfo.deaths}
+            cases={countryInfo.todayDeaths}
           />
         </div>
         <div className="map">
