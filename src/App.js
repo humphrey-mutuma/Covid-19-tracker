@@ -5,13 +5,15 @@ import InfoBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
 import { Card } from "@material-ui/core";
 import Table from "./components/Table/Table";
-import {sortData} from "./components/utils";
+import LineGraph from "./components/LineGraph/LineGraph";
+import { sortData } from "./components/utils";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  // const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     fetch("https://disease.sh./v3/covid-19/all")
@@ -30,13 +32,13 @@ function App() {
             name: country.country, //kenya, United Kingdom
             value: country.countryInfo.iso2, // ke, UK
           }));
-          const sortedData = sortData(data)
+          const sortedData = sortData(data);
           setTableData(sortedData);
           setCountries(countries);
         });
     };
     getCountriesData();
-  }, [countries]);
+  }, []);
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
@@ -96,8 +98,9 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live cases by Country</h3>
-          <Table countries={tableData}/>
-          <h3>Worldwide cases</h3>
+          <Table countries={tableData} />
+          <h3>Worldwide new cases</h3>
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
