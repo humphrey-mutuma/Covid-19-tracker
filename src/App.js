@@ -5,6 +5,7 @@ import InfoBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
 import { Card } from "@material-ui/core";
 import Table from "./components/Table/Table";
+import {sortData} from "./components/utils";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -29,7 +30,8 @@ function App() {
             name: country.country, //kenya, United Kingdom
             value: country.countryInfo.iso2, // ke, UK
           }));
-          setTableData(data)
+          const sortedData = sortData(data)
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
