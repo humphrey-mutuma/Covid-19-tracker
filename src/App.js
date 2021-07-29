@@ -23,7 +23,7 @@ function App() {
   // const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
-    fetch("https://disease.sh./v3/covid-19/all")
+    fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
@@ -36,15 +36,16 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           const countries = data.map((country) => ({
-            name: country.country, //kenya, United Kingdom
-            value: country.countryInfo.iso2, // ke, UK
+            name: country.country,
+            value: country.countryInfo.iso2,
           }));
-          const sortedData = sortData(data);
-          setTableData(sortedData);
-          setMapCountries(data);
+          let sortedData = sortData(data);
           setCountries(countries);
+          setMapCountries(data);
+          setTableData(sortedData);
         });
     };
+
     getCountriesData();
   }, []);
 
@@ -55,14 +56,12 @@ function App() {
       countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setCountry(countryCode);
+        // setInputCountry(countryCode);
         setCountryInfo(data);
-
-        setMapCenter([data.countryInfo.lat, data.countryInfo.lng]);
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
   };
