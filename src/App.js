@@ -8,6 +8,7 @@ import Table from "./components/Table/Table";
 import LineGraph from "./components/LineGraph/LineGraph";
 import { sortData, prettyPrintStat } from "./components/utils";
 import "leaflet/dist/leaflet.css";
+import numeral from "numeral";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -88,29 +89,33 @@ function App() {
           <InfoBox
             onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
-            total={prettyPrintStat(countryInfo.cases)}
+            isRed
+            active={casesType === "cases"}
             cases={prettyPrintStat(countryInfo.todayCases)}
+            total={numeral(countryInfo.cases).format("0.0a")}
           />
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
-            total={prettyPrintStat(countryInfo.recovered)}
+            active={casesType === "recovered"}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={numeral(countryInfo.recovered).format("0.0a")}
           />
           <InfoBox
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            total={prettyPrintStat(countryInfo.deaths)}
+            isRed
+            active={casesType === "deaths"}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
           />
         </div>
-          <Map
-            casesType={casesType}
-            countries={mapCountries}
-            center={mapCenter}
-            zoom={mapZoom}
-          />
-       </section>
+        <Map
+          casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+        />
+      </section>
       <Card className="app__right">
         <CardContent>
           <h3>Live cases by Country</h3>
