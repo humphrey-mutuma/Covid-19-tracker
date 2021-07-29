@@ -7,12 +7,19 @@ import { Card } from "@material-ui/core";
 import Table from "./components/Table/Table";
 import LineGraph from "./components/LineGraph/LineGraph";
 import { sortData } from "./components/utils";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState({
+    lat: 34.80746,
+    lng: -40.4796,
+  });
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
   // const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
@@ -34,6 +41,7 @@ function App() {
           }));
           const sortedData = sortData(data);
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries);
         });
     };
@@ -53,6 +61,9 @@ function App() {
       .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
+
+        setMapCenter([data.countryInfo.lat, data.countryInfo.lng]);
+        setMapZoom(4);
       });
   };
 
@@ -91,8 +102,8 @@ function App() {
             cases={countryInfo.todayDeaths}
           />
         </div>
-        <div className="map">
-          <Map />
+        <div className="mapContainer">
+          <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
         </div>
       </section>
       <Card className="app__right">
