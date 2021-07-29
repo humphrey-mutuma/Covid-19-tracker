@@ -6,7 +6,7 @@ import Map from "./components/Map/Map";
 import { Card } from "@material-ui/core";
 import Table from "./components/Table/Table";
 import LineGraph from "./components/LineGraph/LineGraph";
-import { sortData } from "./components/utils";
+import { sortData, prettyPrintStat } from "./components/utils";
 import "leaflet/dist/leaflet.css";
 
 function App() {
@@ -87,18 +87,18 @@ function App() {
         <div className="app__stats">
           <InfoBox
             title="Coronavirus Cases"
-            total={countryInfo.cases}
-            cases={countryInfo.todayCases}
+            total={prettyPrintStat(countryInfo.cases)}
+            cases={prettyPrintStat(countryInfo.todayCases)}
           />
           <InfoBox
             title="Recovered"
-            total={countryInfo.recovered}
-            cases={countryInfo.todayRecovered}
+            total={prettyPrintStat(countryInfo.recovered)}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
           />
           <InfoBox
             title="Deaths"
-            total={countryInfo.deaths}
-            cases={countryInfo.todayDeaths}
+            total={prettyPrintStat(countryInfo.deaths)}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
           />
         </div>
         <div className="mapContainer">
