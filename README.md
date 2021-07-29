@@ -1,5 +1,5 @@
 # Covid-19-tracker
-A Covid-19 tracker app. collects live data from disease.sh API
+A Covid-19 tracker app. Collects live data from disease.sh API
 
 # Getting Started with Create React App
 
