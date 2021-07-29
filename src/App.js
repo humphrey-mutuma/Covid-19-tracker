@@ -104,21 +104,19 @@ function App() {
             cases={prettyPrintStat(countryInfo.todayDeaths)}
           />
         </div>
-        <div className="mapContainer">
           <Map
             casesType={casesType}
             countries={mapCountries}
             center={mapCenter}
             zoom={mapZoom}
           />
-        </div>
-      </section>
+       </section>
       <Card className="app__right">
         <CardContent>
           <h3>Live cases by Country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new cases</h3>
-          <LineGraph />
+          <h3>Worldwide new {casesType}</h3>
+          <LineGraph casesType={casesType} />
         </CardContent>
       </Card>
     </div>
